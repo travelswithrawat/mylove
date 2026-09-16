@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1014">
+
+<title>Kannu Ji — Ek Maafi</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hind:wght@300;400;500;600&family=Kalam:wght@300;400;700&display=swap');
+
+:root {
+    --bg: #080d10;
+    --text: #f4eee6;
+    --muted: #b9b0a6;
+    --accent: #d8b58c;
+    --accent-soft: rgba(216,181,140,.18);
+    --card: rgba(255,255,255,.055);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Hind", sans-serif;
+    overflow-x: hidden;
+}
+
+/* ---------- LOADING ---------- */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #080d10;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-heart {
+    font-size: 28px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.loader p {
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(4,8,11,.25),
+            rgba(4,8,11,.75) 75%,
+            #080d10
+        ),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=85")
+        center/cover no-repeat;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(0,0,0,.45) 75%
+    );
+}
+
+.mountains {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(
+        145deg,
+        transparent 48%,
+        #080d10 49%
+    );
+    opacity: .8;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    max-width: 850px;
+}
+
+.small-title {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: fadeUp 1.2s .5s forwards;
+}
+
+.hero h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(55px, 11vw, 125px);
+    font-weight: 400;
+    line-height: .9;
+    opacity: 0;
+    animation: fadeUp 1.4s .8s forwards;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--accent);
+    font-style: italic;
+}
+
+.hero-subtitle {
+    margin: 35px auto 0;
+    max-width: 600px;
+    color: #d3cbc2;
+    font-size: 18px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 1.2s 1.2s forwards;
+}
+
+.scroll {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    color: #aaa;
+    font-size: 12px;
+    letter-spacing: 3px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translate(-50%,0); }
+    50% { transform: translate(-50%,8px); }
+}
+
+/* ---------- SECTIONS ---------- */
+
+section {
+    min-height: 100vh;
+    padding: 120px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: min(900px, 100%);
+    margin: auto;
+}
+
+.section-number {
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-bottom: 22px;
+}
+
+h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 35px;
+}
+
+.text {
+    color: #c8c0b7;
+    font-size: 20px;
+    line-height: 2;
+    max-width: 720px;
+}
+
+.highlight {
+    color: var(--accent);
+}
+
+.divider {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+    margin: 35px 0;
+    opacity: .7;
+}
+
+/* ---------- CARDS ---------- */
+
+.card {
+    margin-top: 55px;
+    padding: 45px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    border-radius: 4px;
+}
+
+.card p {
+    color: #d0c8bf;
+    font-size: 19px;
+    line-height: 1.9;
+}
+
+/* ---------- PHOTO ---------- */
+
+.photo-section {
+    min-height: 90vh;
+}
+
+.photo-frame {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 50px auto 0;
+    overflow: hidden;
+    background: #111;
+}
+
+.photo-frame img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    filter: brightness(.72) saturate(.8);
+    transition: transform 1.2s ease;
+}
+
+.photo-frame:hover img {
+    transform: scale(1.04);
+}
+
+.photo-caption {
+    padding: 18px 0;
+    color: #8f8880;
+    font-family: "Kalam", cursive;
+    font-size: 17px;
+}
+
+/* ---------- LETTER ---------- */
+
+.letter {
+    background:
+        linear-gradient(
+            rgba(8,13,16,.92),
+            rgba(8,13,16,.96)
+        ),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80")
+        center/cover fixed;
+}
+
+.letter-box {
+    background: rgba(20,25,28,.72);
+    border: 1px solid rgba(216,181,140,.22);
+    padding: clamp(30px,6vw,75px);
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+}
+
+.letter-box p {
+    color: #ddd4ca;
+    font-size: 20px;
+    line-height: 2.05;
+    margin-bottom: 25px;
+}
+
+.signature {
+    margin-top: 50px;
+    font-family: "Kalam", cursive;
+    font-size: 25px;
+    color: var(--accent);
+}
+
+/* ---------- FINAL ---------- */
+
+.final {
+    text-align: center;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(216,181,140,.09),
+            transparent 50%
+        );
+}
+
+.final .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final h2 {
+    max-width: 800px;
+}
+
+.final-message {
+    max-width: 650px;
+    color: #bdb4aa;
+    font-size: 19px;
+    line-height: 2;
+}
+
+.heart {
+    font-size: 34px;
+    margin: 40px 0;
+    opacity: .85;
+    animation: heartbeat 2s infinite;
+}
+
+.end-line {
+    color: var(--accent);
+    font-family: "Kalam", cursive;
+    font-size: 24px;
+}
+
+/* ---------- MUSIC BUTTON ---------- */
+
+.music-btn {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 100;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.2);
+    background: rgba(15,20,23,.8);
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-size: 18px;
+    transition: .3s;
+}
+
+.music-btn:hover {
+    transform: scale(1.08);
+    border-color: var(--accent);
+}
+
+/* ---------- REVEAL ---------- */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+
+    section {
+        padding: 90px 20px;
+        min-height: 90vh;
+    }
+
+    .hero {
+        min-height: 100svh;
+    }
+
+    .hero h1 {
+        font-size: 62px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .text,
+    .letter-box p,
+    .card p {
+        font-size: 17px;
+        line-height: 1.85;
+    }
+
+    h2 {
+        font-size: 45px;
+    }
+
+    .card {
+        padding: 28px 22px;
+    }
+
+    .letter-box {
+        padding: 30px 22px;
+    }
+
+    .photo-frame img {
+        aspect-ratio: 4/3;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+    <div class="loader-heart">♡</div>
+    <p>एक छोटी सी बात...</p>
+</div>
+
+
+<!-- OPTIONAL MUSIC -->
+
+<audio id="bgMusic" loop>
+    <!--
+    अपनी music file का नाम यहाँ डालो:
+
+    <source src="music.mp3" type="audio/mpeg">
+
+    अगर music नहीं चाहिए तो खाली छोड़ सकते हो.
+    -->
+</audio>
+
+<button class="music-btn" id="musicBtn" aria-label="Music">
+    ♫
+</button>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            सिर्फ एक बात कहनी थी...
+        </div>
+
+        <h1>
+            Kannu Ji,
+            <span>एक माफ़ी...</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            कुछ बातें वापस नहीं ली जा सकतीं,
+            लेकिन अपनी गलती को स्वीकार किया जा सकता है।
+        </p>
+
+    </div>
+
+    <div class="mountains"></div>
+
+    <div class="scroll">
+        ↓ &nbsp; धीरे-धीरे पढ़ना
+    </div>
+
+</header>
+
+
+<!-- SECTION 01 -->
+
+<section>
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            01 — मेरी गलती
+        </div>
+
+        <h2>
+            मुझे अपनी गलती<br>
+            समझ आ गई है।
+        </h2>
+
+        <div class="divider"></div>
+
+        <p class="text">
+            गुस्से में मैंने ऐसी बातें कह दीं,
+            जो मुझे नहीं कहनी चाहिए थीं।
+            <br><br>
+
+            उस वक्त शायद मैं अपने शब्दों की गंभीरता
+            नहीं समझ पाया, लेकिन अब समझता हूँ कि
+            <span class="highlight">मेरी गलती थी।</span>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- SECTION 02 -->
+
+<section>
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            02 — कोई बहाना नहीं
+        </div>
+
+        <h2>
+            गुस्सा कारण हो सकता है,<br>
+            बहाना नहीं।
+        </h2>
+
+        <div class="card">
+
+            <p>
+                मैं यह नहीं कहूँगा कि
+                “मैं गुस्से में था इसलिए ऐसा हुआ।”
+                <br><br>
+
+                क्योंकि गुस्सा मेरी कही हुई बातों को
+                सही नहीं बना देता।
+                <br><br>
+
+                मुझे अपनी बातों की जिम्मेदारी लेनी चाहिए थी।
+                और आज मैं बिना किसी बहाने के
+                अपनी गलती स्वीकार करता हूँ।
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PHOTO SECTION -->
+
+<section class="photo-section">
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            03 — कुछ यादें
+        </div>
+
+        <h2>
+            अच्छी यादों को<br>
+            गलत बातों से छोटा नहीं करना चाहता।
+        </h2>
+
+        <p class="text">
+            जो अच्छा था, वह अच्छा था।
+            और जो गलत हुआ, उसे गलत कहना भी जरूरी है।
+        </p>
+
+        <div class="photo-frame">
+
+            <!--
+            अपनी photo लगाने के लिए:
+            photo.jpg को अपनी image के नाम से बदलो.
+            -->
+
+            <img
+                src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85"
+                alt="Mountain">
+
+        </div>
+
+        <div class="photo-caption">
+            “कुछ यादें तस्वीरों से नहीं, दिल में रहती हैं।”
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LETTER -->
+
+<section class="letter">
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            04 — कन्नू जी के नाम
+        </div>
+
+        <div class="letter-box">
+
+            <h2>
+                दिल से...
+            </h2>
+
+            <p>
+                कन्नू जी,
+            </p>
+
+            <p>
+                मुझे नहीं पता कि मेरी यह बात
+                आपके लिए कितनी मायने रखेगी,
+                लेकिन मुझे यह कहना जरूरी लगा।
+            </p>
+
+            <p>
+                मैंने गुस्से में आपको hurt किया,
+                ऐसी बातें कहीं जिनसे आपको दुख पहुँचा।
+                उसके लिए मुझे सच में अफसोस है।
+            </p>
+
+            <p>
+                मैं अपनी गलती को किसी वजह,
+                परिस्थिति या गुस्से के पीछे छिपाना नहीं चाहता।
+                <strong>गलती मेरी थी।</strong>
+            </p>
+
+            <p>
+                मुझे पता है कि सिर्फ “sorry”
+                कह देने से जो हुआ वह वापस ठीक नहीं हो जाता।
+                इसलिए मैं आपसे यह उम्मीद भी नहीं कर रहा
+                कि आप तुरंत सब कुछ भूल जाएँगी।
+            </p>
+
+            <p>
+                मैं बस चाहता था कि मेरी माफ़ी
+                आप तक ईमानदारी से पहुँचे।
+            </p>
+
+            <p>
+                अगर मेरी बातों से आपको दुख हुआ,
+                तो उसके लिए दिल से माफ़ी।
+            </p>
+
+            <div class="signature">
+                — Pratap
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SECTION 05 -->
+
+<section>
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            05 — कोई दबाव नहीं
+        </div>
+
+        <h2>
+            आपको कुछ<br>
+            करना जरूरी नहीं है।
+        </h2>
+
+        <div class="divider"></div>
+
+        <p class="text">
+            मैं आपसे कोई जवाब नहीं माँग रहा।
+            <br><br>
+
+            न कोई फैसला,
+            न कोई वादा,
+            न ही आप पर कोई दबाव।
+            <br><br>
+
+            यह वेबसाइट सिर्फ इसलिए है क्योंकि
+            मुझे लगा कि एक बार अपनी गलती को
+            <span class="highlight">पूरी ईमानदारी से स्वीकार करना चाहिए।</span>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div class="container reveal">
+
+        <div class="section-number">
+            आख़िरी बात
+        </div>
+
+        <h2>
+            माफ़ कर पाना<br>
+            आपके हाथ में है।
+        </h2>
+
+        <p class="final-message">
+            लेकिन अपनी गलती मानना मेरे हाथ में था।
+            <br><br>
+
+            और आज मैं उसे बिना किसी बहाने के मानता हूँ।
+            <br><br>
+
+            <span class="highlight">
+                I'm sorry, Kannu Ji.
+            </span>
+        </p>
+
+        <div class="heart">
+            ♡
+        </div>
+
+        <div class="end-line">
+            बस इतना ही कहना था...
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ---------- LOADER ---------- */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hide");
+    }, 1200);
+
+});
+
+
+/* ---------- SCROLL REVEAL ---------- */
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+    (entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+
+        });
+
+    },
+    {
+        threshold: 0.15
+    }
+);
+
+reveals.forEach(element => {
+    observer.observe(element);
+});
+
+
+/* ---------- MUSIC ---------- */
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let playing = false;
+
+musicBtn.addEventListener("click", async () => {
+
+    /*
+    Browser autoplay policy के कारण
+    music user click के बाद ही चलेगा.
+    */
+
+    if (!music.src) {
+
+        alert(
+            "Music चलाने के लिए index.html में audio source जोड़ें:\n\n" +
+            '<source src="music.mp3" type="audio/mpeg">'
+        );
+
+        return;
+    }
+
+    if (!playing) {
+
+        try {
+
+            await music.play();
+
+            playing = true;
+            musicBtn.innerHTML = "❚❚";
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    } else {
+
+        music.pause();
+
+        playing = false;
+        musicBtn.innerHTML = "♫";
+
+    }
+
+});
+
+
+/* ---------- PARALLAX HERO ---------- */
+
+window.addEventListener("scroll", () => {
+
+    const hero = document.querySelector(".hero");
+    const scrollY = window.scrollY;
+
+    if (scrollY < window.innerHeight) {
+
+        hero.style.backgroundPosition =
+            `center ${scrollY * 0.35}px`;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
