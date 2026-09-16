@@ -800,6 +800,8 @@ reveals.forEach(element => {
 
 /* ---------- MUSIC ---------- */
 
+/* ---------- MUSIC ---------- */
+
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
@@ -807,48 +809,36 @@ let playing = false;
 
 musicBtn.addEventListener("click", async () => {
 
-    /*
-    Browser autoplay policy के कारण
-    music user click के बाद ही चलेगा.
-    */
+    try {
 
-    if (!music.src) {
-
-        alert(
-            "Music चलाने के लिए index.html में audio source जोड़ें:\n\n" +
-            '<source src="music.mp3" type="audio/mpeg">'
-        );
-
-        return;
-    }
-
-    if (!playing) {
-
-        try {
+        if (!playing) {
 
             await music.play();
 
             playing = true;
             musicBtn.innerHTML = "❚❚";
 
-        } catch (error) {
+        } else {
 
-            console.log(error);
+            music.pause();
+
+            playing = false;
+            musicBtn.innerHTML = "♫";
 
         }
 
-    } else {
+    } catch (error) {
 
-        music.pause();
+        console.error("Music error:", error);
 
-        playing = false;
-        musicBtn.innerHTML = "♫";
+        alert(
+            "Music file नहीं मिली।\n\n" +
+            "Check करें कि music.mp3 और index.html एक ही folder में हैं।"
+        );
 
     }
 
 });
-
-
 /* ---------- PARALLAX HERO ---------- */
 
 window.addEventListener("scroll", () => {
